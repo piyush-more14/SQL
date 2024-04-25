@@ -1,0 +1,42 @@
+CREATE DATABASE taxidb;
+
+use taxidb;
+
+CREATE TABLE city (
+  city varchar(30),
+  population int,
+  total_users int
+);
+
+
+CREATE TABLE customer (
+  customer_id int,
+  gender varchar(10),
+  age int,
+  income int
+);
+
+
+CREATE TABLE taxi (
+  transaction_id int,
+  comapany varchar(30),
+  city varchar(30),
+  distance int,
+  price_charged int,
+  cost int
+);
+
+
+CREATE TABLE transaction1 (
+  transaction_id int,
+  customer_id int,
+  payment_mode varchar(10)
+);
+
+
+ALTER TABLE city ADD PRIMARY KEY (city);
+ALTER TABLE transaction1 ADD PRIMARY KEY (transaction_id);
+ALTER TABLE taxi ADD CONSTRAINT fk_transaction_id FOREIGN KEY (transaction_id) REFERENCES transaction1 (transaction_id);
+ALTER TABLE taxi ADD CONSTRAINT fk_city FOREIGN KEY (city) REFERENCES city (city);
+ALTER TABLE customer ADD PRIMARY KEY (customer_id);
+ALTER TABLE transaction1 ADD CONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES customer (customer_id);
